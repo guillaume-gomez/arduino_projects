@@ -1,25 +1,3 @@
-/*
-  Arduino Starter Kit example
-  Project 11 - Crystal Ball
-
-  This sketch is written to accompany Project 11 in the Arduino Starter Kit
-
-  Parts required:
-  - 220 ohm resistor
-  - 10 kilohm resistor
-  - 10 kilohm potentiometer
-  - 16x2 LCD screen
-  - tilt switch
-
-  created 13 Sep 2012
-  by Scott Fitzgerald
-
-  https://store.arduino.cc/genuino-starter-kit
-
-  This example code is part of the public domain.
-*/
-
-// include the library code:
 #include <LiquidCrystal.h>
 
 // initialize the library with the numbers of the interface pins
