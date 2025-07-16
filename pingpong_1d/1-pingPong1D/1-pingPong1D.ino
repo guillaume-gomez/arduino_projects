@@ -56,51 +56,38 @@ int interval = 250;
 
 int gameState = 0; // 0 -> game start, 1 => game play, 2 => game over
 
-
 void setup() 
 {
   Serial.begin(9600);
   lcd.begin(16, 2); // set up number of columns and rows
+
+  // init special characters
   lcd.createChar(ballNum, ballChars);
   lcd.createChar(racketNum, racketChar);
   lcd.createChar(racketClickedNum, racketCharClicked); 
 
+  // connect the buttons
   pinMode(leftSwitch, INPUT);
   pinMode(rightSwitch, INPUT);
 }
 
 
 void loop() {
-  unsigned long currentTime = millis();
   switch(gameState) {
     case 0:
-      gameStartLoop(currentTime);
+      gameStartLoop();
     break;
     case 1:
-      gamePlayLoop(currentTime);
+      gamePlayLoop();
     break;
     case 2:
-      gameOverLoop(currentTime);
+      gameOverLoop();
     break;
   }
 }
 
-
-
-void gameStartLoop(unsigned long currentTime) {
-  lcd.clear();
-  lcd.setCursor(4, 0);
-  lcd.print("Welcome to ");
-  lcd.setCursor(2,1);
-  lcd.print("Ping Pong 1D"); 
-
-  delay(3000);
-
-  player1Score = player2Score = 0;
-  gameState = 1;
-}
-
-void gamePlayLoop(unsigned long currentTime) {
+void gamePlayLoop() {
+  unsigned long currentTime = millis();
   int leftState = digitalRead(leftSwitch);
   int rightState = digitalRead(rightSwitch);
   
@@ -170,7 +157,7 @@ void gamePlayLoop(unsigned long currentTime) {
   }
 }
 
-void gameOverLoop(unsigned long currentTime) {
+void gameOverLoop() {
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("Game over !");
@@ -181,8 +168,19 @@ void gameOverLoop(unsigned long currentTime) {
     lcd.print("Player 2 wins");
   }
  
-
   delay(3000);
   gameState = 0;
 }
- 
+
+void gameStartLoop() {
+  lcd.clear();
+  lcd.setCursor(4, 0);
+  lcd.print("Welcome to ");
+  lcd.setCursor(2,1);
+  lcd.print("Ping Pong 1D"); 
+
+  delay(3000);
+
+  player1Score = player2Score = 0;
+  gameState = 1;
+}
