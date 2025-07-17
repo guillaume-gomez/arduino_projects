@@ -308,14 +308,14 @@ design rules under a new name.
 <element name="S2" library="Tinkercad" library_urn="urn:adsk.eagle:library:30890021" package="SWITCH-MOMENTARY-PTH-6.5MM" package3d_urn="urn:adsk.eagle:package:32246662/3" value="SWITCH_MOMENTARY" x="193.4336" y="98.4277" rot="R90" smashed="yes"/>
 </elements>
 <signals>
-<signal name="U1_D9">
+<signal name="U1_D8">
 <contactref element="S1" pad="3"/>
-<contactref element="U1" pad="D9"/>
 <contactref element="RRESISTANCE_BOUTON_GAUCHE" pad="2"/>
+<contactref element="U1" pad="D8"/>
 <contactref element="S1" pad="4"/>
 <wire x1="127.1142" y1="95.1765" x2="127.1142" y2="101.6789" width="0" layer="19" extent="1-1"/>
 <wire x1="127.1142" y1="95.1765" x2="127.3936" y2="86.9977" width="0" layer="19" extent="1-1"/>
-<wire x1="66.8399" y1="122.4937" x2="127.1142" y2="101.6789" width="0" layer="19" extent="1-1"/>
+<wire x1="69.3799" y1="122.4937" x2="127.1142" y2="101.6789" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="U1_GND">
 <contactref element="U2" pad="5"/>
@@ -393,14 +393,14 @@ design rules under a new name.
 <contactref element="U1" pad="D5"/>
 <wire x1="37.084" y1="36.6268" x2="78.2699" y2="122.4937" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="U1_D8">
+<signal name="U1_D9">
 <contactref element="S2" pad="4"/>
 <contactref element="RRESISTANCE_DROITE" pad="2"/>
 <contactref element="S2" pad="3"/>
-<contactref element="U1" pad="D8"/>
+<contactref element="U1" pad="D9"/>
 <wire x1="195.6942" y1="101.6789" x2="195.6942" y2="95.1765" width="0" layer="19" extent="1-1"/>
 <wire x1="195.9736" y1="86.9977" x2="195.6942" y2="95.1765" width="0" layer="19" extent="1-1"/>
-<wire x1="195.6942" y1="101.6789" x2="69.3799" y2="122.4937" width="0" layer="19" extent="1-1"/>
+<wire x1="195.6942" y1="101.6789" x2="66.8399" y2="122.4937" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 </board>
