@@ -41,9 +41,9 @@ byte racketCharClicked[8] = {
 int leftSwitch = 8;
 int rightSwitch = 9;
 
-int ballNum = 0;
-int racketNum = 1;
-int racketClickedNum = 2; 
+const int BALL_NUM = 0;
+const int RACKET_NUM = 1;
+int RACKET_CLICKED_NUM = 2; 
 
 int indexBall = 6;
 int direction = 1;
@@ -62,9 +62,9 @@ void setup()
   lcd.begin(16, 2); // set up number of columns and rows
 
   // init special characters
-  lcd.createChar(ballNum, ballChars);
-  lcd.createChar(racketNum, racketChar);
-  lcd.createChar(racketClickedNum, racketCharClicked); 
+  lcd.createChar(BALL_NUM, ballChars);
+  lcd.createChar(RACKET_NUM, racketChar);
+  lcd.createChar(RACKET_CLICKED_NUM, racketCharClicked); 
 
   // connect the buttons
   pinMode(leftSwitch, INPUT);
@@ -86,33 +86,47 @@ void loop() {
   }
 }
 
+void renderRacket(int switchState) {
+  if(switchState == 1)
+    {
+      lcd.write(byte(RACKET_NUM));
+    }
+    else
+    {
+      lcd.write(byte(RACKET_CLICKED_NUM));
+    }
+}
+
+void computeBallPosition() {
+
+}
+
 void gamePlayLoop() {
   unsigned long currentTime = millis();
   int leftState = digitalRead(leftSwitch);
   int rightState = digitalRead(rightSwitch);
   
-  if(leftState == 1 && indexBall < 3)
-  {
-    direction = 1; 
-  }
-  
-  else if(rightState == 1 && indexBall > 12 )
-  {
-    direction = -1; 
-  }
-  
-
   if(currentTime - previousTime > interval  ) {
     previousTime = currentTime;  
+
+    if(leftState == 1 && indexBall == 1)
+    {
+      direction = 1; 
+    }
+    
+    else if(rightState == 1 && indexBall == 14 )
+    {
+      direction = -1; 
+    }
   
     indexBall = indexBall + direction ;
-    if(indexBall >= 14 || indexBall <= 1) 
+    if(indexBall > 14 || indexBall < 1) 
     {
-      if(indexBall >= 14)
+      if(indexBall > 14)
       {
         player1Score = player1Score + 1; 
       }
-      else if(indexBall <= 1)
+      else if(indexBall < 1)
       {
         player2Score = player2Score + 1; 
       }
@@ -120,32 +134,18 @@ void gamePlayLoop() {
       direction = -1 * direction;
     }
 
+    // render ball and rackets
     lcd.clear();
     lcd.setCursor(indexBall, 0);
-    lcd.write(byte(0)); 
+    lcd.write(byte(BALL_NUM)); 
 
     lcd.setCursor(0, 0);
-    if(leftState == 1)
-    {
-      lcd.write(byte(1));
-    }
-    else
-    {
-      lcd.write(byte(2));
-    }
-
+    renderRacket(leftState);
+  
     lcd.setCursor(15, 0);
-    if(rightState == 1)
-    {
-      lcd.write(byte(1));
-    }
-    else
-    {
-      lcd.write(byte(2));
-    }
+    renderRacket(rightState);
 
-
-    //scores
+    //render scores
     lcd.setCursor(0, 1);
     lcd.print(player1Score);
     lcd.setCursor(14,1);
@@ -174,7 +174,7 @@ void gameOverLoop() {
 
 void gameStartLoop() {
   lcd.clear();
-  lcd.setCursor(4, 0);
+  lcd.setCursor(2, 0);
   lcd.print("Welcome to ");
   lcd.setCursor(2,1);
   lcd.print("Ping Pong 1D"); 
